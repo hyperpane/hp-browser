@@ -1,0 +1,92 @@
+{
+  "manifest": 1,
+  "id": "browser",
+  "name": "Browser",
+  "version": "0.0.1",
+  "publisher": "hyperpane",
+  "description": "A real web page on the canvas, one per window: back and forward, devices and rotation, bookmarks, DevTools. ⌘- or Ctrl-click opens a link in a new window.",
+  "icon": "icon.svg",
+  "category": "Web",
+  "engines": { "hyperpane": ">=0.1.5" },
+  "permissions": ["webview"],
+  "client": { "main": "main.tsx" },
+  "contributes": {
+    "nodes": [
+      {
+        "kind": "",
+        "title": "Browser",
+        "icon": "icon.svg",
+        "size": [960, 680],
+        "data": { "new": "1" },
+        "opens": [{ "glob": "*.{html,htm}", "score": 0.5 }]
+      }
+    ],
+    "settings": [
+      {
+        "id": "homePage",
+        "title": "Home page",
+        "description": "What a new Browser opens: anything the address bar takes. Empty: it shows your bookmarks.",
+        "type": "string",
+        "default": "",
+        "placeholder": "localhost:5173",
+        "group": "New windows"
+      },
+      {
+        "id": "device",
+        "title": "Device",
+        "description": "The size a new Browser shows pages at. Responsive fills the window.",
+        "type": "enum",
+        "default": "responsive",
+        "options": [
+          { "value": "responsive", "label": "Responsive" },
+          { "value": "iphone-se", "label": "iPhone SE (375 × 667)" },
+          { "value": "iphone-15", "label": "iPhone 15 (390 × 844)" },
+          { "value": "iphone-16-pro-max", "label": "iPhone 16 Pro Max (440 × 956)" },
+          { "value": "pixel-7", "label": "Pixel 7 (412 × 915)" },
+          { "value": "galaxy-s24", "label": "Galaxy S24 (360 × 780)" },
+          { "value": "ipad-mini", "label": "iPad mini (744 × 1133)" },
+          { "value": "ipad", "label": "iPad (820 × 1180)" },
+          { "value": "laptop", "label": "Laptop (1280 × 800)" },
+          { "value": "desktop", "label": "Desktop (1440 × 900)" },
+          { "value": "full-hd", "label": "Full HD (1920 × 1080)" }
+        ],
+        "group": "New windows"
+      },
+      {
+        "id": "bookmarksBar",
+        "title": "Bookmarks bar",
+        "description": "Your bookmarks under the address bar, when you have some.",
+        "type": "boolean",
+        "default": true,
+        "group": "Bookmarks"
+      },
+      {
+        "id": "searchEngine",
+        "title": "Search engine",
+        "description": "Where words typed in the address bar go.",
+        "type": "enum",
+        "default": "duckduckgo",
+        "options": [
+          { "value": "duckduckgo", "label": "DuckDuckGo" },
+          { "value": "google", "label": "Google" },
+          { "value": "bing", "label": "Bing" },
+          { "value": "brave", "label": "Brave Search" },
+          { "value": "startpage", "label": "Startpage" },
+          { "value": "ecosia", "label": "Ecosia" },
+          { "value": "custom", "label": "Custom…" }
+        ],
+        "group": "Search"
+      },
+      {
+        "id": "searchUrl",
+        "title": "Custom search URL",
+        "description": "The address of a search, with %s where the words go.",
+        "type": "string",
+        "default": "",
+        "placeholder": "https://example.com/search?q=%s",
+        "when": { "setting": "searchEngine", "is": "custom" },
+        "group": "Search"
+      }
+    ]
+  }
+}
