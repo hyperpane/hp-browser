@@ -6,6 +6,8 @@ cookies and sign-ins kept for the Browser alone. The desktop app only.
 
 ## Using it
 
+- **A new Browser:** the globe in the canvas's toolbar, beside the drawing
+  tools (right-click it to hide it; Plugins → Browser shows it again).
 - **The address bar** takes a URL, `localhost:5173`, just a port (`5173`),
   a file's path, or words to search (the search engine is a setting).
 - **Back, forward, reload** in the bar; ⌘[ and ⌘], ⌘R (⇧⌘R ignores the

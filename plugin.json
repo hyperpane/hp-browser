@@ -21,6 +21,15 @@
         "opens": [{ "glob": "*.{html,htm}", "score": 0.5 }]
       }
     ],
+    "buttons": [
+      {
+        "id": "new",
+        "title": "New browser",
+        "icon": "icon.svg",
+        "slot": "toolbar",
+        "action": { "newNode": { "plugin": "browser", "kind": "" } }
+      }
+    ],
     "settings": [
       {
         "id": "homePage",
