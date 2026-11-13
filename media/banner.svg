@@ -1,0 +1,180 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-label="Browser: A real web page on your canvas, at any device's size.">
+  <defs>
+    <radialGradient id="glow" cx="0.18" cy="0.22" r="0.65">
+      <stop offset="0" stop-color="#22b8cf" stop-opacity="0.38"/>
+      <stop offset="1" stop-color="#22b8cf" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="0.85" cy="0.9" r="0.5">
+      <stop offset="0" stop-color="#22b8cf" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#22b8cf" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="tile" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#22b8cf"/>
+      <stop offset="1" stop-color="#22b8cf" stop-opacity="0.65"/>
+    </linearGradient>
+    <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.2" fill="#ffffff" fill-opacity="0.05"/>
+    </pattern>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="24" stdDeviation="28" flood-color="#000" flood-opacity="0.55"/>
+    </filter>
+    <clipPath id="screen"><rect width="540" height="404" rx="0"/></clipPath>
+  </defs>
+  <rect width="1280" height="640" fill="#0c0f15"/>
+  <rect width="1280" height="640" fill="url(#dots)"/>
+  <rect width="1280" height="640" fill="url(#glow)"/>
+  <rect width="1280" height="640" fill="url(#glow2)"/>
+
+  <g transform="translate(88 82)">
+    <rect width="104" height="104" rx="26" fill="url(#tile)"/>
+    <rect width="104" height="104" rx="26" fill="none" stroke="#ffffff" stroke-opacity="0.18"/>
+    <g transform="translate(22 22)"><g transform="scale(2.5)" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></g></g>
+  </g>
+  <text x="84" y="266" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="76" font-weight="700" letter-spacing="-1.5" fill="#f4f6fb">Browser</text>
+  <text x="88" y="326" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="29" fill="#9aa3b6">A real web page on your canvas, at</text>
+  <text x="88" y="366" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="29" fill="#9aa3b6">any device's size.</text>
+  <g transform="translate(0 414)"><g transform="translate(88 0)"><rect width="99" height="38" rx="19" fill="#22b8cf" fill-opacity="0.12" stroke="#22b8cf" stroke-opacity="0.45"/><text x="49.5" y="25" text-anchor="middle" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#f4f6fb">Devices</text></g><g transform="translate(197 0)"><rect width="118" height="38" rx="19" fill="#22b8cf" fill-opacity="0.12" stroke="#22b8cf" stroke-opacity="0.45"/><text x="59" y="25" text-anchor="middle" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#f4f6fb">Bookmarks</text></g><g transform="translate(325 0)"><rect width="109" height="38" rx="19" fill="#22b8cf" fill-opacity="0.12" stroke="#22b8cf" stroke-opacity="0.45"/><text x="54.5" y="25" text-anchor="middle" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#f4f6fb">DevTools</text></g><g transform="translate(444 0)"><rect width="118" height="38" rx="19" fill="#22b8cf" fill-opacity="0.12" stroke="#22b8cf" stroke-opacity="0.45"/><text x="59" y="25" text-anchor="middle" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#f4f6fb">localhost</text></g></g>
+  <g transform="translate(88 588)" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="17" fill="#5d6678">
+    <rect width="18" height="18" rx="5" fill="none" stroke="#5d6678" stroke-width="1.6"/>
+    <path d="M5 6.5h8M5 11.5h5" stroke="#5d6678" stroke-width="1.6" stroke-linecap="round"/>
+    <text x="28" y="14">a hyperpane plugin</text>
+  </g>
+
+  <g transform="translate(660 92)" filter="url(#shadow)">
+    <rect width="540" height="456" rx="16" fill="#121722" stroke="#262d3c"/>
+    <rect width="540" height="52" rx="16" fill="#171d2a"/>
+    <rect y="36" width="540" height="16" fill="#171d2a"/>
+    <line x1="0" y1="52" x2="540" y2="52" stroke="#262d3c"/>
+    <circle cx="24" cy="26" r="6" fill="#ff5f57"/><circle cx="44" cy="26" r="6" fill="#febc2e"/><circle cx="64" cy="26" r="6" fill="#28c840"/>
+    <g transform="translate(90 15)"><g transform="scale(0.9166666666666666)" fill="none" stroke="#22b8cf" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></g></g>
+    <text x="120" y="32" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#f4f6fb">Browser</text>
+    <g transform="translate(0 52)" clip-path="url(#screen)"><g font-family="Inter, -apple-system, 'Segoe UI', sans-serif" font-size="12">
+  <defs>
+    <linearGradient id="br-hero" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#22b8cf"/>
+      <stop offset="1" stop-color="#7c6cf2"/>
+    </linearGradient>
+    <clipPath id="br-phone"><rect x="200" y="96" width="140" height="300" rx="10"/></clipPath>
+  </defs>
+
+  <!-- The bar: back, forward, reload, the address, the device, bookmarks, DevTools -->
+  <rect x="0" y="0" width="540" height="44" fill="#0f131c"/>
+  <g fill="none" stroke="#9aa3b6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M22 22h-10M16 17l-5 5 5 5"/>
+    <path d="M38 22h10M44 17l5 5-5 5" stroke="#5d6678"/>
+    <path d="M78 18.5a6.5 6.5 0 1 0 1.2 5.5M78.5 14.5v4.5H74"/>
+  </g>
+  <rect x="92" y="8" width="238" height="28" rx="14" fill="#0c0f15" stroke="#262d3c"/>
+  <g fill="none" stroke="#9aa3b6" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="104" y="20" width="9" height="7" rx="1.5"/><path d="M106 20v-2a2.5 2.5 0 0 1 5 0v2"/>
+  </g>
+  <text x="120" y="26.5" fill="#9aa3b6">localhost:5173<tspan fill="#f4f6fb">/pricing</tspan></text>
+  <path d="M314 15.5l2 4.2 4.6.6-3.4 3.2.9 4.5-4.1-2.2-4.1 2.2.9-4.5-3.4-3.2 4.6-.6z" fill="#22b8cf"/>
+
+  <rect x="340" y="8" width="100" height="28" rx="8" fill="#22b8cf" fill-opacity="0.18" stroke="#22b8cf" stroke-opacity="0.35"/>
+  <g fill="none" stroke="#22b8cf" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="350" y="14" width="10" height="16" rx="2"/><path d="M354 27h2"/>
+    <path d="M427 20l3 3 3-3"/>
+  </g>
+  <text x="366" y="26.5" fill="#f4f6fb" font-weight="600">iPhone 15</text>
+  <g fill="none" stroke="#9aa3b6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="452" y="17" width="16" height="10" rx="2"/>
+    <path d="M478 14h8v16l-4-3-4 3z"/>
+    <path d="M500 18l-4 4 4 4M508 18l4 4-4 4"/>
+    <circle cx="522" cy="22" r="0.8"/><circle cx="527" cy="22" r="0.8"/><circle cx="532" cy="22" r="0.8"/>
+  </g>
+
+  <!-- Bookmarks bar -->
+  <rect x="0" y="44" width="540" height="28" fill="#0f131c"/>
+  <line x1="0" y1="72" x2="540" y2="72" stroke="#232a38"/>
+  <g font-size="11" fill="#c9d1e0">
+    <rect x="12" y="52" width="12" height="12" rx="3" fill="#22b8cf"/><text x="30" y="62">Dev server</text>
+    <rect x="102" y="52" width="12" height="12" rx="3" fill="#f778ba"/><text x="120" y="62">Storybook</text>
+    <rect x="190" y="52" width="12" height="12" rx="3" fill="#d29922"/><text x="208" y="62">Grafana</text>
+    <rect x="266" y="52" width="12" height="12" rx="3" fill="#3fb950"/><text x="284" y="62">Staging</text>
+    <rect x="340" y="52" width="12" height="12" rx="3" fill="#9aa3b6"/><text x="358" y="62">MDN</text>
+  </g>
+
+  <!-- The stage: the device's outline, its name and size above it -->
+  <path d="M0 73h540v315a16 16 0 0 1-16 16H16a16 16 0 0 1-16-16z" fill="#0b0e14"/>
+  <text x="270" y="88" fill="#5d6678" font-size="10" text-anchor="middle">iPhone 15 · 390 × 844 · 36%</text>
+  <rect x="200" y="96" width="140" height="300" rx="10" fill="#ffffff"/>
+
+  <g clip-path="url(#br-phone)">
+    <!-- the page -->
+    <rect x="200" y="96" width="140" height="26" fill="#ffffff"/>
+    <circle cx="214" cy="109" r="5" fill="url(#br-hero)"/>
+    <text x="223" y="112.5" fill="#0c0f15" font-size="9.5" font-weight="700">Lumen</text>
+    <g stroke="#0c0f15" stroke-width="1.3" stroke-linecap="round"><path d="M318 105.5h9M318 109h9M318 112.5h9"/></g>
+    <line x1="200" y1="122" x2="340" y2="122" stroke="#e8ebf2"/>
+
+    <text x="212" y="146" fill="#0c0f15" font-size="14" font-weight="800" letter-spacing="-0.3">Ship pages</text>
+    <text x="212" y="163" fill="#0c0f15" font-size="14" font-weight="800" letter-spacing="-0.3">people love.</text>
+    <text x="212" y="179" fill="#5d6678" font-size="8">Preview every screen before</text>
+    <text x="212" y="189" fill="#5d6678" font-size="8">it goes live.</text>
+    <rect x="212" y="198" width="58" height="20" rx="10" fill="#0c0f15"/>
+    <text x="241" y="211" fill="#ffffff" font-size="8" font-weight="600" text-anchor="middle">Start free</text>
+    <rect x="275" y="198" width="52" height="20" rx="10" fill="none" stroke="#d5dae4"/>
+    <text x="301" y="211" fill="#0c0f15" font-size="8" font-weight="600" text-anchor="middle">Pricing</text>
+
+    <rect x="212" y="230" width="116" height="62" rx="8" fill="url(#br-hero)"/>
+    <rect x="222" y="240" width="46" height="5" rx="2.5" fill="#ffffff" fill-opacity="0.9"/>
+    <rect x="222" y="250" width="30" height="4" rx="2" fill="#ffffff" fill-opacity="0.55"/>
+    <g fill="#ffffff" fill-opacity="0.85">
+      <rect x="226" y="270" width="8" height="14" rx="1.5"/><rect x="238" y="264" width="8" height="20" rx="1.5"/>
+      <rect x="250" y="274" width="8" height="10" rx="1.5"/><rect x="262" y="260" width="8" height="24" rx="1.5"/>
+      <rect x="274" y="266" width="8" height="18" rx="1.5"/><rect x="286" y="256" width="8" height="28" rx="1.5"/>
+      <rect x="298" y="262" width="8" height="22" rx="1.5"/><rect x="310" y="252" width="8" height="32" rx="1.5"/>
+    </g>
+
+    <rect x="212" y="304" width="116" height="84" rx="8" fill="#f5f7fb" stroke="#e3e7ef"/>
+    <text x="222" y="320" fill="#5d6678" font-size="8" font-weight="600">PRO</text>
+    <text x="222" y="341" fill="#0c0f15" font-size="17" font-weight="800">$12<tspan fill="#5d6678" font-size="8" font-weight="500"> /month</tspan></text>
+    <g font-size="7.5" fill="#2b3240">
+      <path d="M223 352l2 2 3.5-3.5M223 364l2 2 3.5-3.5M223 376l2 2 3.5-3.5" fill="none" stroke="#22b8cf" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="233" y="356">Unlimited previews</text>
+      <text x="233" y="368">Custom domains</text>
+      <text x="233" y="380">Team sign-in</text>
+    </g>
+  </g>
+  <rect x="200" y="96" width="140" height="300" rx="10" fill="none" stroke="#262d3c"/>
+
+  <!-- The device menu, open -->
+  <g font-size="11">
+    <rect x="336" y="50" width="202" height="299" rx="11" fill="#000" fill-opacity="0.35"/>
+    <rect x="340" y="46" width="194" height="295" rx="9" fill="#171d2a" stroke="#2f3747"/>
+    <text x="364" y="65.5" fill="#c9d1e0">Responsive</text>
+    <text x="522" y="65.5" fill="#5d6678" text-anchor="end">fills the window</text>
+    <line x1="348" y1="75.5" x2="526" y2="75.5" stroke="#262d3c"/>
+    <text x="364" y="93.5" fill="#c9d1e0">iPhone SE</text>
+    <text x="522" y="93.5" fill="#5d6678" text-anchor="end">375 × 667</text>
+    <rect x="344" y="99" width="186" height="19" rx="5" fill="#22b8cf" fill-opacity="0.2"/>
+    <path d="M350 108.5l2.5 2.5 4.5-5" fill="none" stroke="#22b8cf" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="364" y="112.5" fill="#f4f6fb" font-weight="600">iPhone 15</text>
+    <text x="522" y="112.5" fill="#5d6678" text-anchor="end">390 × 844</text>
+    <text x="364" y="131.5" fill="#c9d1e0">iPhone 16 Pro Max</text>
+    <text x="522" y="131.5" fill="#5d6678" text-anchor="end">440 × 956</text>
+    <text x="364" y="150.5" fill="#c9d1e0">Pixel 7</text>
+    <text x="522" y="150.5" fill="#5d6678" text-anchor="end">412 × 915</text>
+    <text x="364" y="169.5" fill="#c9d1e0">Galaxy S24</text>
+    <text x="522" y="169.5" fill="#5d6678" text-anchor="end">360 × 780</text>
+    <line x1="348" y1="179.5" x2="526" y2="179.5" stroke="#262d3c"/>
+    <text x="364" y="197.5" fill="#c9d1e0">iPad mini</text>
+    <text x="522" y="197.5" fill="#5d6678" text-anchor="end">744 × 1133</text>
+    <text x="364" y="216.5" fill="#c9d1e0">iPad</text>
+    <text x="522" y="216.5" fill="#5d6678" text-anchor="end">820 × 1180</text>
+    <line x1="348" y1="226.5" x2="526" y2="226.5" stroke="#262d3c"/>
+    <text x="364" y="244.5" fill="#c9d1e0">Laptop</text>
+    <text x="522" y="244.5" fill="#5d6678" text-anchor="end">1280 × 800</text>
+    <text x="364" y="263.5" fill="#c9d1e0">Desktop</text>
+    <text x="522" y="263.5" fill="#5d6678" text-anchor="end">1440 × 900</text>
+    <text x="364" y="282.5" fill="#c9d1e0">Full HD</text>
+    <text x="522" y="282.5" fill="#5d6678" text-anchor="end">1920 × 1080</text>
+    <line x1="348" y1="292.5" x2="526" y2="292.5" stroke="#262d3c"/>
+    <text x="364" y="310.5" fill="#c9d1e0">Custom Size…</text>
+    <text x="364" y="329.5" fill="#c9d1e0">Turn to Landscape</text>
+  </g>
+</g>
+</g>
+  </g>
+</svg>

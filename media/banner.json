@@ -1,0 +1,7 @@
+{
+  "accent": "#22b8cf",
+  "tagline": "A real web page on your canvas, at any device's size.",
+  "chips": ["Devices", "Bookmarks", "DevTools", "localhost"],
+  "window": "Browser",
+  "illustration": "illustration.svg"
+}
