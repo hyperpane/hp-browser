@@ -8,8 +8,12 @@ import type { MenuEntry } from '@hyperpane/ui';
 import { hostOf } from '../lib/address.ts';
 import { CUSTOM, DEVICES, type Device } from '../lib/devices.ts';
 import type { Bookmark } from '../lib/store.ts';
+import type { Anchor } from '../views/Toolbar.tsx';
 
-type Entries = (MenuEntry | null)[];
+export type Entries = (MenuEntry | null)[];
+/** The app's menus open at a pointer: a button's anchor stands in for one. */
+type PointerLike = { clientX: number; clientY: number; preventDefault(): void; stopPropagation(): void };
+export const at = (a: Anchor): PointerLike => ({ clientX: a.x, clientY: a.y, preventDefault() {}, stopPropagation() {} });
 /** ⌘-click, or Ctrl+Click off a Mac. */
 const CLICK = keys('⌘') === '⌘' ? '⌘-click' : `${keys('⌘')}+Click`;
 const check = (on: boolean, label: string) => `${on ? '✓' : ' '} ${label}`;

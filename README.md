@@ -36,9 +36,16 @@ it sees the same.
 |---|---|
 | `plugin.json` | The manifest: the window type, its settings, and the `webview` permission. |
 | `src/client/main.tsx` | The frame's entry. |
-| `src/client/app/Browser.tsx` | The window: the page (`host.web`), where it goes, keys, menus. |
+| `src/client/app/Browser.tsx` | The window, put together from the parts below. |
+| `src/client/app/usePage.ts` | The page (`host.web`): where it is, the address bar's text, its load, its events. |
+| `src/client/app/useStage.ts` | Where the page goes in the frame, a device's size scaled to fit. |
+| `src/client/app/useDevice.ts` | The device it's shown as, a custom size, the turn to landscape. |
+| `src/client/app/useMarks.ts` | Bookmarks as the window uses them: the star, opening one, their menus. |
+| `src/client/app/useWindow.ts` | A new window's home page and device; the window's title and header menu. |
+| `src/client/app/keys.ts` | The keys while the frame has them. |
+| `src/client/app/useProgress.ts` | The load's progress bar. |
 | `src/client/app/menus.ts` | The menus: devices, bookmarks, a bookmark's, the page's right-click. |
-| `src/client/views/` | The bar (`Toolbar.tsx`) and the bookmarks (`Bookmarks.tsx`). |
+| `src/client/views/` | The bar (`Toolbar.tsx`), the bookmarks (`Bookmarks.tsx`), a device's outline and a page's error (`Stage.tsx`). |
 | `src/client/lib/` | What the address bar takes (`address.ts`), devices (`devices.ts`), bookmarks and history (`store.ts`). |
 
 The page itself is the app's (`sdk/RPC.md` §8): a plugin with the `webview`
