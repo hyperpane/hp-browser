@@ -2,7 +2,7 @@
   "manifest": 1,
   "id": "browser",
   "name": "Browser",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "hyperpane",
   "description": "A real web page on your canvas, one per window: localhost in a keystroke, phone, tablet and desktop sizes, bookmarks, DevTools. ⌘- or Ctrl-click opens a link in a new window.",
   "icon": "icon.svg",
@@ -88,7 +88,7 @@
           { "value": "brave", "label": "Brave Search" },
           { "value": "startpage", "label": "Startpage" },
           { "value": "ecosia", "label": "Ecosia" },
-          { "value": "custom", "label": "Custom…" }
+          { "value": "custom", "label": "Custom" }
         ],
         "group": "Search"
       },
@@ -106,6 +106,6 @@
   },
   "signature": {
     "key": "ed25519:5LgmP9NjLnpvz48igrFekSqi+4k6gzaO8sNwlsgNKFc=",
-    "sig": "XFuod6p7Z9A3RtUgLIPTdloTfEy26UCsOYalB5Y+Avx2U8sbwDrep06jvXpB0XPrBeEuCODfzzc2M917lG/8Cg=="
+    "sig": "UIz8kAbY/h1gePh4Nh9CrNSDbRxe1UPPaCKNT1bqGutUgVQ4C/EBl90IUny8PQDQ3ZSkW3WlrhddtlSKUQc6Bg=="
   }
 }

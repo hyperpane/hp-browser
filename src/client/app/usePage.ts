@@ -60,7 +60,7 @@ export function usePage(
   };
 
   const newWindow = (to: string) => {
-    host.app.newNode(host.init.plugin.id, '', { data: { url: to } }).catch((e: Error) => host.app.toast('Couldn’t open a new window.', { description: e.message, error: true }));
+    host.app.newNode(host.init.plugin.id, '', { data: { url: to } }).catch((e: Error) => host.app.toast('Couldn’t open a new window', { description: e.message, error: true }));
   };
 
   /** The page as it is now, in the window's data, a moment after it
@@ -86,7 +86,7 @@ export function usePage(
     input.select();
   };
 
-  const copy = (text: string) => navigator.clipboard.writeText(text).catch((e: Error) => host.app.toast('Couldn’t copy.', { description: e.message, error: true }));
+  const copy = (text: string) => navigator.clipboard.writeText(text).catch((e: Error) => host.app.toast('Couldn’t copy', { description: e.message, error: true }));
 
   /** Opens what's typed, as the address bar does (`localhost:3000`,
    * `example.com`, words to search). The page it's on already loads again,

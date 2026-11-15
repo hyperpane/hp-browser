@@ -52,7 +52,7 @@ export function Blank({ list, actions }: { list: Bookmark[]; actions: BookmarkAc
   return (
     <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 overflow-auto p-6 text-center text-[var(--node-muted)]">
       <Globe className="size-6" />
-      <p className="max-w-sm">Type an address above: a URL, localhost:5173, just a port (5173), a file’s path, or words to search.</p>
+      <p className="max-w-sm">Type an address above: a URL, localhost:5173, just a port (5173), a file’s path, or words to search</p>
       {list.length > 0 && (
         <div className="flex w-full max-w-xl flex-wrap justify-center gap-2">
           {list.map((b) => (

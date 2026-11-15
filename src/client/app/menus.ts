@@ -43,7 +43,7 @@ export function deviceMenu(o: {
     null,
     ...kind('computer'),
     null,
-    { label: check(o.device === CUSTOM, 'Custom Size…'), shortcut: o.device === CUSTOM ? o.size?.replace('x', ' × ') : undefined, run: o.custom },
+    { label: check(o.device === CUSTOM, 'Custom Size'), shortcut: o.device === CUSTOM ? o.size?.replace('x', ' × ') : undefined, run: o.custom },
     { label: `${' '} ${o.landscape ? 'Turn to Portrait' : 'Turn to Landscape'}`, disabled: !turnable, run: o.rotate },
   ];
 }
@@ -65,7 +65,7 @@ export function bookmarksMenu(o: {
       : [{ label: 'No bookmarks yet', disabled: true, run() {} }]),
     null,
     { label: o.current ? 'Remove This Page’s Bookmark' : 'Bookmark This Page', shortcut: keys('⌘D'), disabled: !o.url, run: o.toggle },
-    ...(o.current ? [{ label: 'Rename This Page’s Bookmark…', run: () => o.rename(o.current!) }] : []),
+    ...(o.current ? [{ label: 'Rename This Page’s Bookmark', run: () => o.rename(o.current!) }] : []),
     { label: o.bar ? 'Hide the Bookmarks Bar' : 'Show the Bookmarks Bar', run: () => o.setBar(!o.bar) },
   ];
 }
@@ -84,7 +84,7 @@ export function bookmarkMenu(o: {
     { label: 'Open', run: () => o.open(false) },
     { label: 'Open in New Window', shortcut: CLICK, run: () => o.open(true) },
     null,
-    { label: 'Rename…', run: o.rename },
+    { label: 'Rename', run: o.rename },
     { label: 'Copy Address', run: o.copy },
     { label: 'Move Left', disabled: o.first, run: () => o.move(-1) },
     { label: 'Move Right', disabled: o.last, run: () => o.move(1) },

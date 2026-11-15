@@ -113,12 +113,12 @@ export function hostOf(url: string): string {
 /** Chromium's errors, plainly. */
 export function failure(code: number, description: string): string {
   if (code === -102) return 'Nothing answered there. Is the server running?';
-  if (code === -105 || code === -137) return 'There’s no such host.';
-  if (code === -106) return 'This computer is offline.';
-  if (code === -118 || code === -7) return 'The connection timed out.';
-  if (code === -6) return 'There’s no such file.';
-  if (code === -10) return 'The page isn’t allowed to open that.';
-  if (code <= -200 && code > -300) return 'The site’s certificate isn’t trusted.';
-  if (code === -300) return 'That isn’t an address a page can open.';
-  return description.replace(/^ERR_/, '').replace(/_/g, ' ').toLowerCase() || 'The page didn’t load.';
+  if (code === -105 || code === -137) return 'There’s no such host';
+  if (code === -106) return 'This computer is offline';
+  if (code === -118 || code === -7) return 'The connection timed out';
+  if (code === -6) return 'There’s no such file';
+  if (code === -10) return 'The page isn’t allowed to open that';
+  if (code <= -200 && code > -300) return 'The site’s certificate isn’t trusted';
+  if (code === -300) return 'That isn’t an address a page can open';
+  return description.replace(/^ERR_/, '').replace(/_/g, ' ').toLowerCase() || 'The page didn’t load';
 }

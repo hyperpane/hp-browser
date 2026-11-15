@@ -21,7 +21,7 @@ export function useDevice(host: Host, data: Record<string, string>, view: Viewpo
     const text = await host.ui.prompt({ title: 'Custom Size', label: 'Width × height, in CSS pixels', value: was, placeholder: '1280 × 800' });
     if (text === null) return;
     const size = parseSize(text);
-    if (!size) return host.app.toast('That isn’t a size.', { description: 'Type it as width × height: 1280 × 800.', error: true });
+    if (!size) return host.app.toast('That isn’t a size', { description: 'Type it as width × height: 1280 × 800.', error: true });
     host.win.setData('device', CUSTOM);
     host.win.setData('size', `${size.width}x${size.height}`);
     host.win.setData('landscape', null);
