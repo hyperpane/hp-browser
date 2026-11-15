@@ -1,4 +1,4 @@
-// The Browser's bar: back, forward, reload (stop while it loads), the
+// The Browser's bar (in the kit's Toolbar): back, forward, reload (stop while it loads), the
 // address field with how the page is secured and its bookmark star, then
 // the device and its rotation, bookmarks, DevTools and the rest.
 
@@ -25,7 +25,7 @@ import {
   X,
 } from 'lucide-react';
 import { keys } from '@hyperpane/sdk/client';
-import { ToolButton, cn, styles } from '@hyperpane/ui';
+import { Progress as KitProgress, ToolButton, Toolbar as KitToolbar, cn, styles } from '@hyperpane/ui';
 import { display, security } from '../lib/address.ts';
 import type { DeviceKind } from '../lib/devices.ts';
 
@@ -90,7 +90,8 @@ export function Toolbar({
   const DeviceIcon = device ? DEVICE_ICONS[device.kind] : Maximize;
   const listId = 'browser-history';
   return (
-    <div className="flex h-8 flex-none items-center gap-0.5 px-1.5">
+    // The kit's toolbar, the Browser's size: 32px, its loading line under it in place of a border.
+    <KitToolbar className="h-8 gap-0.5 border-b-0 px-1.5">
       <ToolButton label={`Back (${keys('⌘[')})`} icon={ArrowLeft} disabled={!nav.back} onClick={onBack} />
       <ToolButton label={`Forward (${keys('⌘]')})`} icon={ArrowRight} disabled={!nav.forward} onClick={onForward} />
       {loading ? (
@@ -184,18 +185,13 @@ export function Toolbar({
       <ToolButton label="Bookmarks" icon={Bookmark} onClick={(e) => onBookmarksMenu(below(e))} />
       <ToolButton label={`Developer tools (${keys('⌥⌘I')})`} icon={Code} disabled={!url} onClick={onDevtools} />
       <ToolButton label="More" icon={Ellipsis} onClick={(e) => onMore(below(e))} />
-    </div>
+    </KitToolbar>
   );
 }
 
-/** A thin line under the bar while the page loads, creeping on until it's
- * done. */
+/** A thin line under the bar while the page loads (the kit's Progress),
+ * creeping on until it's done; its 2px kept while it doesn't, so the page
+ * doesn't move. */
 export function Progress({ value }: { value: number | null }) {
-  return (
-    <div className="relative h-0.5 flex-none">
-      {value !== null && (
-        <div className="absolute inset-y-0 left-0 rounded-full bg-[var(--node-accent)] transition-[width] duration-150" style={{ width: `${value * 100}%` }} />
-      )}
-    </div>
-  );
+  return <div className="h-0.5 flex-none">{value !== null && <KitProgress value={value * 100} size="xs" label="Loading" className="rounded-none bg-transparent" />}</div>;
 }

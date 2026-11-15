@@ -2,7 +2,8 @@
 // how its load is going, and what it says as it goes (`host.web`'s events).
 // The page the window's data names is the one shown, so a change from anyone
 // on the project goes there too; where the page goes on its own is kept back
-// in the data a moment after it settles.
+// in the data a moment after it settles. Its URL ports: text in opens as if
+// typed in the address bar; the page's URL goes out as it changes.
 
 import { useEffect, useRef, useState } from 'react';
 import type { Host, WebEvent } from '@hyperpane/sdk/client';
@@ -39,6 +40,8 @@ export function usePage(
   const latest = useRef(o.data);
   latest.current = o.data;
   const keepTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  /** The URL last sent out of its port. */
+  const sent = useRef('');
 
   // Opening ---------------------------------------------------------------------
 
@@ -85,15 +88,35 @@ export function usePage(
 
   const copy = (text: string) => navigator.clipboard.writeText(text).catch((e: Error) => host.app.toast('Couldn’t copy.', { description: e.message, error: true }));
 
+  /** Opens what's typed, as the address bar does (`localhost:3000`,
+   * `example.com`, words to search). The page it's on already loads again,
+   * unless `again` is false. False for nothing typed. */
+  const enter = (text: string, again = true) => {
+    const to = urlFor(text, engine, o.windows);
+    if (!to) return false;
+    if (to !== current.current || error) open(to);
+    else if (again) host.web.reload();
+    return true;
+  };
+
   const submit = () => {
-    const to = urlFor(address, engine, o.windows);
-    if (!to) return setAddress(display(current.current));
+    if (!enter(address)) return setAddress(display(current.current));
     addressInput.current?.blur();
-    if (to === current.current && !error) host.web.reload();
-    else open(to);
     // The page has the keys next, as in a browser.
     host.web.focus();
   };
+
+  // Its URL port in: text from a link, opened as if typed. The page it's on
+  // already stays, so two Browsers linked both ways don't reload forever.
+  const enterRef = useRef(enter);
+  enterRef.current = enter;
+  useEffect(
+    () =>
+      host.ports.onInput('url', (value) => {
+        if (typeof value === 'string' && value.trim()) enterRef.current(value, false);
+      }),
+    [host],
+  );
 
   // The page the window's data names: from here, or anyone's on the project.
   useEffect(() => {
@@ -124,6 +147,12 @@ export function usePage(
         if (!e.inPage) setError(null);
         history.add(e.url);
         keep(e.url);
+        // Its URL port out: the page it's on, once it's there (a reload is
+        // the same page, so it isn't sent again).
+        if (e.url !== sent.current) {
+          sent.current = e.url;
+          host.ports.emit('url', e.url);
+        }
         break;
       case 'title':
         setPageTitle(e.title);

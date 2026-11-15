@@ -20,7 +20,11 @@
         "icon": "icon.svg",
         "size": [960, 680],
         "data": { "new": "1" },
-        "opens": [{ "glob": "*.{html,htm}", "score": 0.5 }]
+        "opens": [{ "glob": "*.{html,htm}", "score": 0.5 }],
+        "ports": [
+          { "id": "url", "label": "URL", "direction": "in", "type": "text" },
+          { "id": "url", "label": "URL", "direction": "out", "type": "text" }
+        ]
       }
     ],
     "buttons": [
@@ -102,6 +106,6 @@
   },
   "signature": {
     "key": "ed25519:5LgmP9NjLnpvz48igrFekSqi+4k6gzaO8sNwlsgNKFc=",
-    "sig": "rE/CL9RAIKNpnbYehVkssjlqkc/r77NCkXzfY4LcKMs8a+GQJWwhq9OVosAl4vvRRm6QR2U/97Yw6QVrD+JSCA=="
+    "sig": "u0EC6ux9LIbZDGulMfJ2Zvdq8YShcRpEDbwRyK0fH30+iQUgPqHjDv1S5t2ky8imP2BnJcXO7IEO7t95kNYqBQ=="
   }
 }
