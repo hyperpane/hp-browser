@@ -7,10 +7,21 @@ import { NodeButton } from '@hyperpane/ui';
 import { display, hostOf } from '../lib/address.ts';
 import { LABEL, type Viewport } from '../app/useStage.ts';
 
-export function DeviceFrame({ view, shown, scale }: { view: Viewport; shown: { left: number; top: number; width: number; height: number }; scale: number | undefined }) {
+export function DeviceFrame({
+  view,
+  shown,
+  scale,
+}: {
+  view: Viewport;
+  shown: { left: number; top: number; width: number; height: number };
+  scale: number | undefined;
+}) {
   return (
     <>
-      <div className="pointer-events-none absolute right-0 left-0 truncate text-center text-[10px] text-[var(--node-muted)] tabular-nums" style={{ top: shown.top - LABEL + 2 }}>
+      <div
+        className="pointer-events-none absolute right-0 left-0 truncate text-center text-[10px] text-[var(--node-muted)] tabular-nums"
+        style={{ top: shown.top - LABEL + 2 }}
+      >
         {view.name} · {view.width} × {view.height}
         {scale !== 1 ? ` · ${Math.round(scale! * 100)}%` : ''}
       </div>

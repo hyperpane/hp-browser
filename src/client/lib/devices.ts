@@ -16,8 +16,7 @@ export interface Device {
   userAgent?: string;
 }
 
-const IPHONE =
-  'Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1';
+const IPHONE = 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1';
 const IPAD = 'Mozilla/5.0 (iPad; CPU OS 18_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.5 Mobile/15E148 Safari/604.1';
 const PIXEL = 'Mozilla/5.0 (Linux; Android 15; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Mobile Safari/537.36';
 const GALAXY = 'Mozilla/5.0 (Linux; Android 14; SM-S921B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Mobile Safari/537.36';
@@ -37,8 +36,8 @@ export const DEVICES: Device[] = [
 ];
 
 export const CUSTOM = 'custom';
-export const MIN_SIZE = 200;
-export const MAX_SIZE = 7680;
+const MIN_SIZE = 200;
+const MAX_SIZE = 7680;
 
 export function deviceById(id: string | undefined): Device | null {
   return DEVICES.find((d) => d.id === id) ?? null;

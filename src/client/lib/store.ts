@@ -57,7 +57,8 @@ export const sameUrl = (a: string, b: string) => a.replace(/\/$/, '') === b.repl
 
 export const bookmarks = {
   list(): Bookmark[] {
-    return (cached ??= read(BOOKMARKS, isBookmark));
+    cached ??= read(BOOKMARKS, isBookmark);
+    return cached;
   },
   find(url: string): Bookmark | undefined {
     return url ? this.list().find((b) => sameUrl(b.url, url)) : undefined;

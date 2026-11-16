@@ -2,7 +2,7 @@
 // address shows there.
 
 /** Where searches go, by the `searchEngine` setting; `%s` is the query. */
-export const ENGINES: Record<string, string> = {
+const ENGINES: Record<string, string> = {
   duckduckgo: 'https://duckduckgo.com/?q=%s',
   google: 'https://www.google.com/search?q=%s',
   bing: 'https://www.bing.com/search?q=%s',

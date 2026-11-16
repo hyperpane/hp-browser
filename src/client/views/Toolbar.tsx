@@ -33,7 +33,7 @@ const DEVICE_ICONS = { phone: Smartphone, tablet: Tablet, computer: Monitor };
 
 /** Where a menu opens under a button: its bottom left. */
 export type Anchor = { x: number; y: number };
-export const below = (e: React.MouseEvent): Anchor => {
+const below = (e: React.MouseEvent): Anchor => {
   const r = e.currentTarget.getBoundingClientRect();
   return { x: r.left, y: r.bottom + 4 };
 };
@@ -193,5 +193,9 @@ export function Toolbar({
  * creeping on until it's done; its 2px kept while it doesn't, so the page
  * doesn't move. */
 export function Progress({ value }: { value: number | null }) {
-  return <div className="h-0.5 flex-none">{value !== null && <KitProgress value={value * 100} size="xs" label="Loading" className="rounded-none bg-transparent" />}</div>;
+  return (
+    <div className="h-0.5 flex-none">
+      {value !== null && <KitProgress value={value * 100} size="xs" label="Loading" className="rounded-none bg-transparent" />}
+    </div>
+  );
 }

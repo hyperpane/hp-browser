@@ -69,7 +69,9 @@ export function Browser({ host }: { host: Host }) {
   if (!host.web.available) {
     return (
       <NodeMessage>
-        {host.init.platform.desktop ? 'This Browser can’t show pages: it needs the webview permission in its plugin.json.' : 'The Browser shows pages in the desktop app'}
+        {host.init.platform.desktop
+          ? 'This Browser can’t show pages: it needs the webview permission in its plugin.json.'
+          : 'The Browser shows pages in the desktop app'}
       </NodeMessage>
     );
   }

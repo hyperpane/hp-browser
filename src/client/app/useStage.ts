@@ -7,7 +7,7 @@ import type { Host, WebRect } from '@hyperpane/sdk/client';
 import type { viewport } from '../lib/devices.ts';
 
 /** Room around a device's page, and for its name above it. */
-export const PAD = 16;
+const PAD = 16;
 export const LABEL = 18;
 
 export type Viewport = NonNullable<ReturnType<typeof viewport>>;
@@ -21,7 +21,9 @@ export function useStage(host: Host, view: Viewport | null, showPage: boolean) {
     if (!el) return;
     const measure = () => {
       const r = el.getBoundingClientRect();
-      setBox((b) => (b && b.x === r.left && b.y === r.top && b.width === r.width && b.height === r.height ? b : { x: r.left, y: r.top, width: r.width, height: r.height }));
+      setBox((b) =>
+        b && b.x === r.left && b.y === r.top && b.width === r.width && b.height === r.height ? b : { x: r.left, y: r.top, width: r.width, height: r.height },
+      );
     };
     measure();
     const observer = new ResizeObserver(measure);
@@ -53,7 +55,10 @@ export function useStage(host: Host, view: Viewport | null, showPage: boolean) {
   });
 
   /** A device's page as the stage shows it, for its outline under the page. */
-  const shown = rect && view ? { left: rect.x - (box?.x ?? 0), top: rect.y - (box?.y ?? 0), width: view.width * (rect.scale ?? 1), height: view.height * (rect.scale ?? 1) } : null;
+  const shown =
+    rect && view
+      ? { left: rect.x - (box?.x ?? 0), top: rect.y - (box?.y ?? 0), width: view.width * (rect.scale ?? 1), height: view.height * (rect.scale ?? 1) }
+      : null;
 
   return { stage, box, rect, shown };
 }
