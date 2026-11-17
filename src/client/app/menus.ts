@@ -61,7 +61,7 @@ export function bookmarksMenu(o: {
   const MAX = 40;
   return [
     ...(o.list.length
-      ? o.list.slice(0, MAX).map((b) => ({ label: b.title.length > 60 ? `${b.title.slice(0, 59)}…` : b.title, shortcut: hostOf(b.url), run: () => o.open(b) }))
+      ? o.list.slice(0, MAX).map((b) => ({ label: b.title.length > 60 ? b.title.slice(0, 60).trimEnd() : b.title, shortcut: hostOf(b.url), run: () => o.open(b) }))
       : [{ label: 'No bookmarks yet', disabled: true, run() {} }]),
     null,
     { label: o.current ? 'Remove This Page’s Bookmark' : 'Bookmark This Page', shortcut: keys('⌘D'), disabled: !o.url, run: o.toggle },
@@ -162,7 +162,7 @@ export function pageMenu(
     const text = e.selection.trim().replace(/\s+/g, ' ');
     group([
       { label: 'Copy', shortcut: keys('⌘C'), run: () => o.edit('copy') },
-      { label: `Search for “${text.length > 30 ? `${text.slice(0, 29)}…` : text}”`, run: () => o.search(text) },
+      { label: `Search for “${text.length > 30 ? text.slice(0, 30).trimEnd() : text}”`, run: () => o.search(text) },
     ]);
   }
   group([
