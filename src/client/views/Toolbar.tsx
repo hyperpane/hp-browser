@@ -1,6 +1,8 @@
 // The Browser's bar (in the kit's Toolbar): back, forward, reload (stop while it loads), the
 // address field with how the page is secured and its bookmark star, then
-// the device and its rotation, bookmarks, DevTools and the rest.
+// the device and its rotation, bookmarks, DevTools and the rest. Narrow (a
+// phone), the device is its icon alone, and rotation, bookmarks and DevTools
+// wait in the device's menu and More.
 
 import type { RefObject } from 'react';
 import {
@@ -91,7 +93,7 @@ export function Toolbar({
   const listId = 'browser-history';
   return (
     // The kit's toolbar, the Browser's size: 32px, its loading line under it in place of a border.
-    <KitToolbar className="h-8 gap-0.5 border-b-0 px-1.5">
+    <KitToolbar className="h-8 gap-0.5 border-b-0 px-1.5 touch:h-11">
       <ToolButton label={`Back (${keys('⌘[')})`} icon={ArrowLeft} disabled={!nav.back} onClick={onBack} />
       <ToolButton label={`Forward (${keys('⌘]')})`} icon={ArrowRight} disabled={!nav.forward} onClick={onForward} />
       {loading ? (
@@ -102,7 +104,7 @@ export function Toolbar({
 
       <div
         className={cn(
-          'rounded-control mx-1 flex h-6 min-w-0 flex-1 items-center gap-1.5 border border-[var(--node-border)] pr-0.5 pl-2 transition-colors duration-100',
+          'rounded-control mx-1 flex h-6 min-w-0 flex-1 touch:h-9 items-center gap-1.5 border border-[var(--node-border)] pr-0.5 pl-2 transition-colors duration-100',
           'focus-within:border-[var(--node-accent)] hover:border-[color-mix(in_srgb,var(--node-fg)_24%,transparent)]',
         )}
       >
@@ -141,7 +143,7 @@ export function Toolbar({
               e.currentTarget.blur();
             }
           }}
-          className="h-full min-w-0 flex-1 bg-transparent text-xs text-[var(--node-fg)] outline-none select-text placeholder:text-[var(--node-muted)]"
+          className="h-full min-w-0 flex-1 bg-transparent text-xs touch:text-sm text-[var(--node-fg)] outline-none select-text placeholder:text-[var(--node-muted)]"
         />
         {url && (
           <button
@@ -152,7 +154,7 @@ export function Toolbar({
             onMouseDown={(e) => e.preventDefault()}
             onClick={onMark}
             className={cn(
-              'rounded-chip flex size-5 flex-none items-center justify-center transition-colors duration-100 hover:bg-[var(--node-hover,var(--node-header))]',
+              'rounded-chip flex size-5 flex-none items-center justify-center transition-colors touch:size-8 duration-100 hover:bg-[var(--node-hover,var(--node-header))]',
               styles.focusRing,
               bookmarked ? 'text-[var(--ansi-3)]' : 'text-[var(--node-muted)] hover:text-[var(--node-fg)]',
             )}
@@ -167,12 +169,12 @@ export function Toolbar({
         title={device ? `${device.name}: ${device.width} × ${device.height}` : 'Responsive: the page fills the window'}
         onClick={(e) => onDeviceMenu(below(e))}
         className={cn(
-          'rounded-control flex h-6 max-w-36 flex-none items-center gap-1 px-1.5 text-[var(--node-muted)] transition-colors duration-100 hover:bg-[var(--node-hover,var(--node-header))] hover:text-[var(--node-fg)]',
+          'rounded-control flex h-6 max-w-36 flex-none items-center gap-1 px-1.5 text-[var(--node-muted)] touch:h-9 transition-colors duration-100 hover:bg-[var(--node-hover,var(--node-header))] hover:text-[var(--node-fg)]',
           styles.focusRing,
         )}
       >
         <DeviceIcon className="size-3.5 flex-none" />
-        <span className="truncate">{device ? device.name : 'Responsive'}</span>
+        <span className="truncate max-sm:hidden">{device ? device.name : 'Responsive'}</span>
         <ChevronDown className="size-3 flex-none" />
       </button>
       {device && (
@@ -180,10 +182,11 @@ export function Toolbar({
           label={landscape ? 'Turn to portrait' : 'Turn to landscape'}
           icon={landscape ? RectangleHorizontal : RectangleVertical}
           onClick={onRotate}
+          className="max-sm:hidden"
         />
       )}
-      <ToolButton label="Bookmarks" icon={Bookmark} onClick={(e) => onBookmarksMenu(below(e))} />
-      <ToolButton label={`Developer tools (${keys('⌥⌘I')})`} icon={Code} disabled={!url} onClick={onDevtools} />
+      <ToolButton label="Bookmarks" icon={Bookmark} onClick={(e) => onBookmarksMenu(below(e))} className="max-sm:hidden" />
+      <ToolButton label={`Developer tools (${keys('⌥⌘I')})`} icon={Code} disabled={!url} onClick={onDevtools} className="max-sm:hidden" />
       <ToolButton label="More" icon={Ellipsis} onClick={(e) => onMore(below(e))} />
     </KitToolbar>
   );

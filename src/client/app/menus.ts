@@ -61,7 +61,9 @@ export function bookmarksMenu(o: {
   const MAX = 40;
   return [
     ...(o.list.length
-      ? o.list.slice(0, MAX).map((b) => ({ label: b.title.length > 60 ? b.title.slice(0, 60).trimEnd() : b.title, shortcut: hostOf(b.url), run: () => o.open(b) }))
+      ? o.list
+          .slice(0, MAX)
+          .map((b) => ({ label: b.title.length > 60 ? b.title.slice(0, 60).trimEnd() : b.title, shortcut: hostOf(b.url), run: () => o.open(b) }))
       : [{ label: 'No bookmarks yet', disabled: true, run() {} }]),
     null,
     { label: o.current ? 'Remove This Page’s Bookmark' : 'Bookmark This Page', shortcut: keys('⌘D'), disabled: !o.url, run: o.toggle },
@@ -96,6 +98,8 @@ export function bookmarkMenu(o: {
 export function moreMenu(o: {
   url: string;
   bar: boolean;
+  /** Narrow, where the bar has no Bookmarks button: its menu from here. */
+  bookmarks?(): void;
   reloadHard(): void;
   openOutside(): void;
   copy(): void;
@@ -107,6 +111,7 @@ export function moreMenu(o: {
     { label: 'Open in Default Browser', disabled: !o.url, run: o.openOutside },
     { label: 'Copy Address', disabled: !o.url, run: o.copy },
     null,
+    ...(o.bookmarks ? [{ label: 'Bookmarks', run: o.bookmarks }] : []),
     { label: o.bar ? 'Hide the Bookmarks Bar' : 'Show the Bookmarks Bar', run: () => o.setBar(!o.bar) },
     null,
     { label: 'Developer Tools', shortcut: keys('⌥⌘I'), disabled: !o.url, run: o.devtools },

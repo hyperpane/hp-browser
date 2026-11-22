@@ -26,7 +26,7 @@ function handlers(b: Bookmark, actions: BookmarkActions) {
 
 export function BookmarksBar({ list, current, actions }: { list: Bookmark[]; current: string; actions: BookmarkActions }) {
   return (
-    <div className="flex h-7 flex-none items-center gap-0.5 overflow-hidden px-1.5 pb-1" aria-label="Bookmarks bar">
+    <div className="scrollbar-none flex h-7 flex-none items-center gap-0.5 overflow-x-auto px-1.5 pb-1 touch:h-10" aria-label="Bookmarks bar">
       {list.map((b) => (
         <button
           key={b.url}
@@ -34,7 +34,7 @@ export function BookmarksBar({ list, current, actions }: { list: Bookmark[]; cur
           title={`${b.title}\n${b.url}`}
           {...handlers(b, actions)}
           className={cn(
-            'rounded-control flex h-6 max-w-44 flex-none items-center gap-1.5 px-2 text-[var(--node-muted)] transition-colors duration-100 hover:bg-[var(--node-hover,var(--node-header))] hover:text-[var(--node-fg)]',
+            'rounded-control flex h-6 max-w-44 flex-none items-center gap-1.5 px-2 text-[var(--node-muted)] touch:h-9 transition-colors duration-100 hover:bg-[var(--node-hover,var(--node-header))] hover:text-[var(--node-fg)]',
             styles.focusRing,
             b.url === current && 'text-[var(--node-fg)]',
           )}

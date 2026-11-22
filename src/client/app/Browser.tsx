@@ -10,12 +10,12 @@
 
 import type { Host } from '@hyperpane/sdk/client';
 import { useData, useServers, useSetting } from '@hyperpane/sdk/client';
-import { NodeMessage, cn, useMenu } from '@hyperpane/ui';
+import { NodeMessage, cn, useCompact, useMenu } from '@hyperpane/ui';
 import { fileUrl, searchUrl } from '../lib/address.ts';
 import { viewport } from '../lib/devices.ts';
 import { Blank, BookmarksBar } from '../views/Bookmarks.tsx';
 import { DeviceFrame, PageError } from '../views/Stage.tsx';
-import { Progress, Toolbar } from '../views/Toolbar.tsx';
+import { type Anchor, Progress, Toolbar } from '../views/Toolbar.tsx';
 import { frameKeys } from './keys.ts';
 import { at, moreMenu } from './menus.ts';
 import { useDevice } from './useDevice.ts';
@@ -34,6 +34,7 @@ export function Browser({ host }: { host: Host }) {
   const engine = searchUrl(engineId, customSearch);
   const windows = host.init.platform.os === 'windows';
   const menu = useMenu();
+  const compact = useCompact();
 
   const view = viewport(data);
   // A file opened with the Browser is a path on the window's server: a
@@ -55,10 +56,11 @@ export function Browser({ host }: { host: Host }) {
 
   const onKeyDown = frameKeys(host, { focusAddress: page.focusAddress, reload: page.reload, toggleMark: marks.toggle });
 
-  const more = () =>
+  const more = (a: Anchor) =>
     moreMenu({
       url,
       bar: barSetting !== false,
+      bookmarks: compact ? () => menu.open(at(a), marks.menu()) : undefined,
       reloadHard: () => page.reload(true),
       openOutside: () => host.app.openExternal(url),
       copy: () => page.copy(url),
@@ -100,7 +102,7 @@ export function Browser({ host }: { host: Host }) {
         onRotate={device.rotate}
         onBookmarksMenu={(a) => menu.open(at(a), marks.menu())}
         onDevtools={() => host.web.devtools()}
-        onMore={(a) => menu.open(at(a), more())}
+        onMore={(a) => menu.open(at(a), more(a))}
       />
       <Progress value={progress} />
       {bar && <BookmarksBar list={marks.list} current={url} actions={marks.actions} />}
