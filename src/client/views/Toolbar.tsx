@@ -92,8 +92,8 @@ export function Toolbar({
   const DeviceIcon = device ? DEVICE_ICONS[device.kind] : Maximize;
   const listId = 'browser-history';
   return (
-    // The kit's toolbar, the Browser's size: 32px, its loading line under it in place of a border.
-    <KitToolbar className="h-8 gap-0.5 border-b-0 px-1.5 touch:h-11">
+    // The kit's toolbar, its line drawn under the bookmarks bar instead (Browser.tsx).
+    <KitToolbar className="gap-0.5 border-b-0 px-2">
       <ToolButton label={`Back (${keys('⌘[')})`} icon={ArrowLeft} disabled={!nav.back} onClick={onBack} />
       <ToolButton label={`Forward (${keys('⌘]')})`} icon={ArrowRight} disabled={!nav.forward} onClick={onForward} />
       {loading ? (
@@ -104,18 +104,19 @@ export function Toolbar({
 
       <div
         className={cn(
-          'rounded-control mx-1 flex h-6 min-w-0 flex-1 touch:h-9 items-center gap-1.5 border border-[var(--node-border)] pr-0.5 pl-2 transition-colors duration-100',
-          'focus-within:border-[var(--node-accent)] hover:border-[color-mix(in_srgb,var(--node-fg)_24%,transparent)]',
+          // A filled field, as the kit's NodeInput: its edge only while it has the keys.
+          'rounded-control mx-1.5 flex h-7 min-w-0 flex-1 touch:h-9 items-center gap-2 border border-transparent bg-[color-mix(in_srgb,var(--node-fg)_6%,transparent)] pr-0.5 pl-2.5 transition-[background-color,border-color,box-shadow] duration-100',
+          'hover:bg-[color-mix(in_srgb,var(--node-fg)_9%,transparent)] focus-within:border-[var(--node-accent)] focus-within:bg-transparent focus-within:shadow-[0_0_0_2px_color-mix(in_srgb,var(--node-accent)_22%,transparent)]',
         )}
       >
         {safety === 'secure' ? (
-          <Lock className="size-3 flex-none text-[var(--node-muted)]" aria-label="Secure" />
+          <Lock className="size-3.5 flex-none text-[var(--node-muted)]" aria-label="Secure" />
         ) : safety === 'file' ? (
-          <FileText className="size-3 flex-none text-[var(--node-muted)]" aria-label="A file" />
+          <FileText className="size-3.5 flex-none text-[var(--node-muted)]" aria-label="A file" />
         ) : safety === 'insecure' ? (
-          <TriangleAlert className="size-3 flex-none text-[var(--ansi-3)]" aria-label="Not secure" />
+          <TriangleAlert className="size-3.5 flex-none text-[var(--ansi-3)]" aria-label="Not secure" />
         ) : (
-          <Globe className="size-3 flex-none text-[var(--node-muted)]" />
+          <Globe className="size-3.5 flex-none text-[var(--node-muted)]" />
         )}
         <datalist id={listId}>
           {suggestions.map((u) => (
@@ -154,7 +155,7 @@ export function Toolbar({
             onMouseDown={(e) => e.preventDefault()}
             onClick={onMark}
             className={cn(
-              'rounded-chip flex size-5 flex-none items-center justify-center transition-colors touch:size-8 duration-100 hover:bg-[var(--node-hover,var(--node-header))]',
+              'rounded-chip flex size-6 flex-none items-center justify-center transition-colors touch:size-8 duration-100 hover:bg-[var(--node-hover,var(--node-header))]',
               styles.focusRing,
               bookmarked ? 'text-[var(--ansi-3)]' : 'text-[var(--node-muted)] hover:text-[var(--node-fg)]',
             )}
@@ -169,7 +170,7 @@ export function Toolbar({
         title={device ? `${device.name}: ${device.width} × ${device.height}` : 'Responsive: the page fills the window'}
         onClick={(e) => onDeviceMenu(below(e))}
         className={cn(
-          'rounded-control flex h-6 max-w-36 flex-none items-center gap-1 px-1.5 text-[var(--node-muted)] touch:h-9 transition-colors duration-100 hover:bg-[var(--node-hover,var(--node-header))] hover:text-[var(--node-fg)]',
+          'rounded-control flex h-7 max-w-36 flex-none items-center gap-1.5 px-2 font-medium text-[var(--node-muted)] touch:h-9 transition-colors duration-100 hover:bg-[var(--node-hover,var(--node-header))] hover:text-[var(--node-fg)]',
           styles.focusRing,
         )}
       >
@@ -192,12 +193,12 @@ export function Toolbar({
   );
 }
 
-/** A thin line under the bar while the page loads (the kit's Progress),
- * creeping on until it's done; its 2px kept while it doesn't, so the page
- * doesn't move. */
+/** A thin line over the bars' bottom edge while the page loads (the kit's
+ * Progress), creeping on until it's done. Laid over the edge, so the page
+ * doesn't move when it comes and goes. */
 export function Progress({ value }: { value: number | null }) {
   return (
-    <div className="h-0.5 flex-none">
+    <div className="pointer-events-none absolute inset-x-0 -bottom-px h-0.5">
       {value !== null && <KitProgress value={value * 100} size="xs" label="Loading" className="rounded-none bg-transparent" />}
     </div>
   );

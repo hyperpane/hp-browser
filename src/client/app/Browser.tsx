@@ -11,7 +11,8 @@
 
 import type { Host } from '@hyperpane/sdk/client';
 import { useData, useServers, useSetting } from '@hyperpane/sdk/client';
-import { NodeMessage, cn, useCompact, useMenu } from '@hyperpane/ui';
+import { Empty, cn, useCompact, useMenu } from '@hyperpane/ui';
+import { Globe, Server } from 'lucide-react';
 import { fileUrl, searchUrl } from '../lib/address.ts';
 import { viewport } from '../lib/devices.ts';
 import { Blank, BookmarksBar } from '../views/Bookmarks.tsx';
@@ -73,42 +74,51 @@ export function Browser({ host }: { host: Host }) {
 
   if (!host.web.available) {
     return (
-      <NodeMessage>
-        {host.init.platform.desktop
-          ? 'This Browser can’t show pages: it needs the webview permission in its plugin.json.'
-          : 'The Browser shows pages in the desktop app'}
-      </NodeMessage>
+      <Empty
+        bordered={false}
+        className="h-full"
+        icon={<Globe />}
+        title="No pages here"
+        description={
+          host.init.platform.desktop
+            ? 'This Browser can’t show pages: it needs the webview permission in its plugin.json.'
+            : 'The Browser shows pages in the desktop app.'
+        }
+      />
     );
   }
 
   return (
     <div className="flex h-full flex-col text-xs" onKeyDown={onKeyDown}>
-      <Toolbar
-        url={url}
-        address={page.address}
-        inputRef={page.addressInput}
-        suggestions={page.suggestions}
-        loading={page.loading}
-        nav={page.nav}
-        bookmarked={!!marks.current}
-        device={view}
-        landscape={device.landscape}
-        onAddress={page.type}
-        onSubmit={page.submit}
-        onRevert={page.revert}
-        onBack={() => host.web.back()}
-        onForward={() => host.web.forward()}
-        onReload={() => page.reload()}
-        onStop={() => host.web.stop()}
-        onMark={marks.toggle}
-        onDeviceMenu={(a) => menu.open(at(a), device.menu())}
-        onRotate={device.rotate}
-        onBookmarksMenu={(a) => menu.open(at(a), marks.menu())}
-        onDevtools={() => host.web.devtools()}
-        onMore={(a) => menu.open(at(a), more(a))}
-      />
-      <Progress value={progress} />
-      {bar && <BookmarksBar list={marks.list} current={url} actions={marks.actions} />}
+      {/* The bars, one line under them all (the loading line over it). */}
+      <div className="relative flex flex-none flex-col border-b border-[var(--node-border)]">
+        <Toolbar
+          url={url}
+          address={page.address}
+          inputRef={page.addressInput}
+          suggestions={page.suggestions}
+          loading={page.loading}
+          nav={page.nav}
+          bookmarked={!!marks.current}
+          device={view}
+          landscape={device.landscape}
+          onAddress={page.type}
+          onSubmit={page.submit}
+          onRevert={page.revert}
+          onBack={() => host.web.back()}
+          onForward={() => host.web.forward()}
+          onReload={() => page.reload()}
+          onStop={() => host.web.stop()}
+          onMark={marks.toggle}
+          onDeviceMenu={(a) => menu.open(at(a), device.menu())}
+          onRotate={device.rotate}
+          onBookmarksMenu={(a) => menu.open(at(a), marks.menu())}
+          onDevtools={() => host.web.devtools()}
+          onMore={(a) => menu.open(at(a), more(a))}
+        />
+        {bar && <BookmarksBar list={marks.list} current={url} actions={marks.actions} />}
+        <Progress value={progress} />
+      </div>
 
       <div ref={stage} className={cn('relative min-h-0 flex-1 overflow-hidden', view && 'bg-[var(--node-header)]')}>
         {/* The app draws the page over this, where `rect` says. */}
@@ -117,9 +127,13 @@ export function Browser({ host }: { host: Host }) {
         {!url && !elsewhere && <Blank list={marks.list} actions={marks.actions} />}
 
         {elsewhere && (
-          <NodeMessage>
-            {data.path} is a file on {servers.find((s) => s.id === serverId)?.name ?? 'another server'}: the Browser shows pages from this computer.
-          </NodeMessage>
+          <Empty
+            bordered={false}
+            className="h-full"
+            icon={<Server />}
+            title="On another server"
+            description={`${data.path} is a file on ${servers.find((s) => s.id === serverId)?.name ?? 'another server'}: the Browser shows pages from this computer.`}
+          />
         )}
 
         {error && <PageError error={error} onRetry={() => page.reload()} />}
