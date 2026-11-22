@@ -2,28 +2,222 @@
   "manifest": 1,
   "id": "browser",
   "name": "Browser",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "publisher": "hyperpane",
   "description": "A real web page on your canvas, one per window: localhost in a keystroke, phone, tablet and desktop sizes, bookmarks, DevTools. ⌘- or Ctrl-click opens a link in a new window.",
   "icon": "icon.svg",
   "category": "Web",
   "license": "MIT",
   "homepage": "https://github.com/hyperpane/hp-browser",
-  "engines": { "hyperpane": ">=0.1.5" },
-  "permissions": ["webview"],
-  "client": { "main": "main.tsx" },
+  "engines": {
+    "hyperpane": ">=0.2.10"
+  },
+  "permissions": [
+    "webview",
+    "webview-control"
+  ],
+  "api": [
+    {
+      "name": "open",
+      "description": "Goes to a page: an address (example.com, localhost:3000, https://…) or words to search for. Answers once it has loaded: { url, title, loading, back, forward, error }.",
+      "args": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "url"
+        ]
+      }
+    },
+    {
+      "name": "state",
+      "description": "Where the page is now: { url, title, loading, back, forward, error }."
+    },
+    {
+      "name": "back",
+      "description": "Goes back a page; answers where it is once loaded."
+    },
+    {
+      "name": "forward",
+      "description": "Goes forward a page; answers where it is once loaded."
+    },
+    {
+      "name": "reload",
+      "description": "Loads the page again; answers where it is once loaded."
+    },
+    {
+      "name": "waitForLoad",
+      "description": "Waits for a page that's loading to finish (at most 30 s); answers where it is."
+    },
+    {
+      "name": "text",
+      "description": "The page's visible text (or an element's, by selector), at most max characters (100000): { text, truncated, url, title }.",
+      "args": {
+        "type": "object",
+        "properties": {
+          "selector": {
+            "type": "string"
+          },
+          "max": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    {
+      "name": "html",
+      "description": "The page's HTML (or an element's, by selector), at most max characters: { html, truncated }.",
+      "args": {
+        "type": "object",
+        "properties": {
+          "selector": {
+            "type": "string"
+          },
+          "max": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    {
+      "name": "elements",
+      "description": "What can be clicked or typed in, numbered: [{ id, tag, role, type, text, name, placeholder, href, disabled, inView }], at most 500. click and type take an id from here (list again after the page changes)."
+    },
+    {
+      "name": "click",
+      "description": "Clicks an element: by id (from elements), a CSS selector, or the text it shows. Answers once the page settles: { clicked, url, title, loading, … }.",
+      "args": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "An element's id, from elements"
+          },
+          "selector": {
+            "type": "string",
+            "description": "A CSS selector"
+          },
+          "text": {
+            "type": "string",
+            "description": "What the button or link says"
+          }
+        }
+      }
+    },
+    {
+      "name": "type",
+      "description": "Types into a field (by id or selector): value replaces what's there unless clear is false; submit presses Enter (and sends its form). Answers where the page is.",
+      "args": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "An element's id, from elements"
+          },
+          "selector": {
+            "type": "string",
+            "description": "A CSS selector"
+          },
+          "value": {
+            "type": "string"
+          },
+          "submit": {
+            "type": "boolean"
+          },
+          "clear": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "value"
+        ]
+      }
+    },
+    {
+      "name": "scroll",
+      "description": "Scrolls the page: by pixels (by, default 600; negative goes up), to top or bottom, or to an element (selector). Answers { y, height }.",
+      "args": {
+        "type": "object",
+        "properties": {
+          "by": {
+            "type": "integer"
+          },
+          "to": {
+            "type": "string",
+            "enum": [
+              "top",
+              "bottom"
+            ]
+          },
+          "selector": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    {
+      "name": "run",
+      "description": "Runs JavaScript in the page (its DOM, none of its own scripts): an expression, or statements with return; awaited. Answers what it returns, as JSON.",
+      "args": {
+        "type": "object",
+        "properties": {
+          "script": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "script"
+        ]
+      }
+    },
+    {
+      "name": "screenshot",
+      "description": "A picture of the page as it's drawn: a PNG file's bytes."
+    },
+    {
+      "name": "watch",
+      "description": "Where the page goes, as it goes: { type: 'state', … } first, then the page's navigate, title, loading, fail and crash events.",
+      "stream": true
+    }
+  ],
+  "client": {
+    "main": "main.tsx"
+  },
   "contributes": {
     "nodes": [
       {
         "kind": "",
         "title": "Browser",
         "icon": "icon.svg",
-        "size": [960, 680],
-        "data": { "new": "1" },
-        "opens": [{ "glob": "*.{html,htm}", "score": 0.5 }],
+        "size": [
+          960,
+          680
+        ],
+        "data": {
+          "new": "1"
+        },
+        "opens": [
+          {
+            "glob": "*.{html,htm}",
+            "score": 0.5
+          }
+        ],
         "ports": [
-          { "id": "url", "label": "URL", "direction": "in", "type": "text" },
-          { "id": "url", "label": "URL", "direction": "out", "type": "text" }
+          {
+            "id": "url",
+            "label": "URL",
+            "direction": "in",
+            "type": "text"
+          },
+          {
+            "id": "url",
+            "label": "URL",
+            "direction": "out",
+            "type": "text"
+          }
         ]
       }
     ],
@@ -33,7 +227,12 @@
         "title": "New browser",
         "icon": "icon.svg",
         "slot": "toolbar",
-        "action": { "newNode": { "plugin": "browser", "kind": "" } }
+        "action": {
+          "newNode": {
+            "plugin": "browser",
+            "kind": ""
+          }
+        }
       }
     ],
     "settings": [
@@ -53,17 +252,50 @@
         "type": "enum",
         "default": "responsive",
         "options": [
-          { "value": "responsive", "label": "Responsive" },
-          { "value": "iphone-se", "label": "iPhone SE (375 × 667)" },
-          { "value": "iphone-15", "label": "iPhone 15 (390 × 844)" },
-          { "value": "iphone-16-pro-max", "label": "iPhone 16 Pro Max (440 × 956)" },
-          { "value": "pixel-7", "label": "Pixel 7 (412 × 915)" },
-          { "value": "galaxy-s24", "label": "Galaxy S24 (360 × 780)" },
-          { "value": "ipad-mini", "label": "iPad mini (744 × 1133)" },
-          { "value": "ipad", "label": "iPad (820 × 1180)" },
-          { "value": "laptop", "label": "Laptop (1280 × 800)" },
-          { "value": "desktop", "label": "Desktop (1440 × 900)" },
-          { "value": "full-hd", "label": "Full HD (1920 × 1080)" }
+          {
+            "value": "responsive",
+            "label": "Responsive"
+          },
+          {
+            "value": "iphone-se",
+            "label": "iPhone SE (375 × 667)"
+          },
+          {
+            "value": "iphone-15",
+            "label": "iPhone 15 (390 × 844)"
+          },
+          {
+            "value": "iphone-16-pro-max",
+            "label": "iPhone 16 Pro Max (440 × 956)"
+          },
+          {
+            "value": "pixel-7",
+            "label": "Pixel 7 (412 × 915)"
+          },
+          {
+            "value": "galaxy-s24",
+            "label": "Galaxy S24 (360 × 780)"
+          },
+          {
+            "value": "ipad-mini",
+            "label": "iPad mini (744 × 1133)"
+          },
+          {
+            "value": "ipad",
+            "label": "iPad (820 × 1180)"
+          },
+          {
+            "value": "laptop",
+            "label": "Laptop (1280 × 800)"
+          },
+          {
+            "value": "desktop",
+            "label": "Desktop (1440 × 900)"
+          },
+          {
+            "value": "full-hd",
+            "label": "Full HD (1920 × 1080)"
+          }
         ],
         "group": "New windows"
       },
@@ -82,13 +314,34 @@
         "type": "enum",
         "default": "duckduckgo",
         "options": [
-          { "value": "duckduckgo", "label": "DuckDuckGo" },
-          { "value": "google", "label": "Google" },
-          { "value": "bing", "label": "Bing" },
-          { "value": "brave", "label": "Brave Search" },
-          { "value": "startpage", "label": "Startpage" },
-          { "value": "ecosia", "label": "Ecosia" },
-          { "value": "custom", "label": "Custom" }
+          {
+            "value": "duckduckgo",
+            "label": "DuckDuckGo"
+          },
+          {
+            "value": "google",
+            "label": "Google"
+          },
+          {
+            "value": "bing",
+            "label": "Bing"
+          },
+          {
+            "value": "brave",
+            "label": "Brave Search"
+          },
+          {
+            "value": "startpage",
+            "label": "Startpage"
+          },
+          {
+            "value": "ecosia",
+            "label": "Ecosia"
+          },
+          {
+            "value": "custom",
+            "label": "Custom"
+          }
         ],
         "group": "Search"
       },
@@ -99,13 +352,16 @@
         "type": "string",
         "default": "",
         "placeholder": "https://example.com/search?q=%s",
-        "when": { "setting": "searchEngine", "is": "custom" },
+        "when": {
+          "setting": "searchEngine",
+          "is": "custom"
+        },
         "group": "Search"
       }
     ]
   },
   "signature": {
     "key": "ed25519:5LgmP9NjLnpvz48igrFekSqi+4k6gzaO8sNwlsgNKFc=",
-    "sig": "I5jfubP33YD5DIKsWByXzyuUCcpS33BE4F4Yi810MnQJpZf03YVZRHKhOfLud6uQxsjHHVSCp8AKnMojBuT3Aw=="
+    "sig": "ogS9z0E9SzqEm4vA0Q/zLW7NHeXbI5G39X9CkPVsIP4qBNif4vv9A3W7cKvQsnxo51cE4hTRXUqvnt6Tmqt+Cw=="
   }
 }

@@ -62,6 +62,35 @@ beside local.
 | Permission | Why |
 | --- | --- |
 | `webview` | To show a web page in its window. |
+| `webview-control` | To read and drive its page for the plugins you let control it (below). |
+
+## For other plugins
+
+A plugin with the `control` permission and `"uses": ["browser"]` can open a
+Browser as its window's child and drive it (an AI plugin, say): it sees the
+same page you do, on your canvas. Every method's arguments and answer are in
+plugin.json's `api` (sdk/RPC.md §15).
+
+| Method | What it does |
+| --- | --- |
+| `open {url}` | Goes to an address, or searches for words; answers once loaded |
+| `state` | Where it is: url, title, loading, back, forward, error |
+| `back`, `forward`, `reload`, `waitForLoad` | As the toolbar's; answer once loaded |
+| `text {selector?, max?}` | The page's visible text |
+| `html {selector?, max?}` | Its HTML |
+| `elements` | What can be clicked or typed in, numbered |
+| `click {id \| selector \| text}` | Clicks it; answers where the page is |
+| `type {id \| selector, value, submit?, clear?}` | Types into a field; `submit` presses Enter |
+| `scroll {by \| to \| selector}` | Scrolls |
+| `run {script}` | Runs JavaScript in the page; its answer, as JSON |
+| `screenshot` | A PNG of the page |
+| `watch` | Where it goes, as it goes (a subscription) |
+
+```ts
+const id = await host.windows.open('browser', { data: { url: 'example.com' } });
+await host.windows.call(id, 'waitForLoad');
+const { text } = await host.windows.call(id, 'text', { max: 20_000 });
+```
 
 ## Good to know
 

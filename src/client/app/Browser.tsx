@@ -6,7 +6,8 @@
 //
 // This puts the window together: the page (`usePage`), where it goes on the
 // stage (`useStage`), the device (`useDevice`), bookmarks (`useMarks`), the
-// window's own title and menu (`useWindow`), and the keys (`keys.ts`).
+// window's own title and menu (`useWindow`), the keys (`keys.ts`), and what
+// it does for other plugins that drive it (`useApi`).
 
 import type { Host } from '@hyperpane/sdk/client';
 import { useData, useServers, useSetting } from '@hyperpane/sdk/client';
@@ -20,6 +21,7 @@ import { frameKeys } from './keys.ts';
 import { at, moreMenu } from './menus.ts';
 import { useDevice } from './useDevice.ts';
 import { useMarks } from './useMarks.ts';
+import { useApi } from './useApi.ts';
 import { usePage } from './usePage.ts';
 import { useProgress } from './useProgress.ts';
 import { useStage } from './useStage.ts';
@@ -49,6 +51,7 @@ export function Browser({ host }: { host: Host }) {
   const { url, error } = page;
   const progress = useProgress(page.loading);
   useWindowMenu(host, page);
+  useApi(host, page);
   const { stage, box, rect, shown } = useStage(host, view, host.web.available && !!url && !error);
   const device = useDevice(host, data, view, box);
   const marks = useMarks(host, page, { menu, bar: barSetting !== false, setBar: (on) => setBarSetting(on) });

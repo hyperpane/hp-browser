@@ -207,5 +207,24 @@ export function usePage(
 
   const revert = () => setAddress(display(current.current));
 
-  return { url, address, title, loading, nav, error, suggestions, current, addressInput, open, newWindow, reload, focusAddress, copy, submit, type, revert };
+  return {
+    url,
+    address,
+    title,
+    loading,
+    nav,
+    error,
+    suggestions,
+    current,
+    addressInput,
+    open,
+    enter,
+    newWindow,
+    reload,
+    focusAddress,
+    copy,
+    submit,
+    type,
+    revert,
+  };
 }
