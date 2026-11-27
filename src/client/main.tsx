@@ -1,5 +1,5 @@
 // The Browser's frame: one window on the canvas, one page in it. React, the
-// SDK, the UI kit and Lucide come from the app.
+// SDK, the UI kit and the icons come from the app.
 
 import { mount } from '@hyperpane/sdk/client';
 import { NodeMessage } from '@hyperpane/ui';

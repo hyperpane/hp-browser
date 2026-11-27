@@ -2,7 +2,7 @@
   "manifest": 1,
   "id": "browser",
   "name": "Browser",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "publisher": "hyperpane",
   "description": "A real web page on your canvas, one per window: localhost in a keystroke, phone, tablet and desktop sizes, bookmarks, DevTools. ⌘- or Ctrl-click opens a link in a new window.",
   "icon": "icon.svg",

@@ -25,7 +25,7 @@ import {
   Tablet,
   TriangleAlert,
   X,
-} from 'lucide-react';
+} from '@hyperpane/icons';
 import { keys } from '@hyperpane/sdk/client';
 import { Progress as KitProgress, ToolButton, Toolbar as KitToolbar, cn, styles } from '@hyperpane/ui';
 import { display, security } from '../lib/address.ts';
@@ -93,7 +93,7 @@ export function Toolbar({
   const listId = 'browser-history';
   return (
     // The kit's toolbar, its line drawn under the bookmarks bar instead (Browser.tsx).
-    <KitToolbar className="gap-0.5 border-b-0 px-2">
+    <KitToolbar className="h-11 gap-0.5 border-b-0 px-2 touch:h-12">
       <ToolButton label={`Back (${keys('⌘[')})`} icon={ArrowLeft} disabled={!nav.back} onClick={onBack} />
       <ToolButton label={`Forward (${keys('⌘]')})`} icon={ArrowRight} disabled={!nav.forward} onClick={onForward} />
       {loading ? (
@@ -104,19 +104,19 @@ export function Toolbar({
 
       <div
         className={cn(
-          // A filled field, as the kit's NodeInput: its edge only while it has the keys.
-          'rounded-control mx-1.5 flex h-7 min-w-0 flex-1 touch:h-9 items-center gap-2 border border-transparent bg-[color-mix(in_srgb,var(--node-fg)_6%,transparent)] pr-0.5 pl-2.5 transition-[background-color,border-color,box-shadow] duration-100',
-          'hover:bg-[color-mix(in_srgb,var(--node-fg)_9%,transparent)] focus-within:border-[var(--node-accent)] focus-within:bg-transparent focus-within:shadow-[0_0_0_2px_color-mix(in_srgb,var(--node-accent)_22%,transparent)]',
+          // A filled pill, as the kit's fields: its edge only while it has the keys.
+          'mx-1.5 flex h-7 min-w-0 flex-1 items-center gap-2 rounded-full border border-transparent bg-[var(--fill)] ps-3 pe-0.5 transition-[background-color,border-color,box-shadow] duration-100 touch:h-9',
+          'hover:bg-[var(--fill-hover)] focus-within:border-[color-mix(in_srgb,var(--node-accent)_75%,transparent)] focus-within:bg-transparent focus-within:shadow-[0_0_0_3px_color-mix(in_srgb,var(--node-accent)_16%,transparent)]',
         )}
       >
         {safety === 'secure' ? (
-          <Lock className="size-3.5 flex-none text-[var(--node-muted)]" aria-label="Secure" />
+          <Lock className="size-3.5 flex-none text-[var(--node-muted)]" variant="outline" aria-label="Secure" />
         ) : safety === 'file' ? (
-          <FileText className="size-3.5 flex-none text-[var(--node-muted)]" aria-label="A file" />
+          <FileText className="size-3.5 flex-none text-[var(--node-muted)]" variant="outline" aria-label="A file" />
         ) : safety === 'insecure' ? (
-          <TriangleAlert className="size-3.5 flex-none text-[var(--ansi-3)]" aria-label="Not secure" />
+          <TriangleAlert className="size-3.5 flex-none text-[var(--amber-soft-foreground)]" variant="outline" aria-label="Not secure" />
         ) : (
-          <Globe className="size-3.5 flex-none text-[var(--node-muted)]" />
+          <Globe className="size-3.5 flex-none text-[var(--node-muted)]" variant="outline" />
         )}
         <datalist id={listId}>
           {suggestions.map((u) => (
@@ -144,7 +144,7 @@ export function Toolbar({
               e.currentTarget.blur();
             }
           }}
-          className="h-full min-w-0 flex-1 bg-transparent text-xs touch:text-sm text-[var(--node-fg)] outline-none select-text placeholder:text-[var(--node-muted)]"
+          className="h-full min-w-0 flex-1 bg-transparent text-[13px] text-[var(--node-fg)] outline-none select-text placeholder:text-[var(--node-muted)] touch:text-sm"
         />
         {url && (
           <button
@@ -155,12 +155,12 @@ export function Toolbar({
             onMouseDown={(e) => e.preventDefault()}
             onClick={onMark}
             className={cn(
-              'rounded-chip flex size-6 flex-none items-center justify-center transition-colors touch:size-8 duration-100 hover:bg-[var(--node-hover,var(--node-header))]',
+              'flex size-6 flex-none items-center justify-center rounded-full transition-colors duration-100 hover:bg-[var(--fill-hover)] touch:size-8',
               styles.focusRing,
-              bookmarked ? 'text-[var(--ansi-3)]' : 'text-[var(--node-muted)] hover:text-[var(--node-fg)]',
+              bookmarked ? 'text-[var(--amber-soft-foreground)]' : 'text-[var(--node-muted)] hover:text-[var(--node-fg)]',
             )}
           >
-            <Star className={cn('size-3.5', bookmarked && 'fill-current')} />
+            <Star className="size-3.5" variant={bookmarked ? 'fill' : 'outline'} />
           </button>
         )}
       </div>
@@ -170,13 +170,13 @@ export function Toolbar({
         title={device ? `${device.name}: ${device.width} × ${device.height}` : 'Responsive: the page fills the window'}
         onClick={(e) => onDeviceMenu(below(e))}
         className={cn(
-          'rounded-control flex h-7 max-w-36 flex-none items-center gap-1.5 px-2 font-medium text-[var(--node-muted)] touch:h-9 transition-colors duration-100 hover:bg-[var(--node-hover,var(--node-header))] hover:text-[var(--node-fg)]',
+          'rounded-control flex h-7 max-w-40 flex-none items-center gap-1.5 px-2 text-[13px] text-[var(--node-muted)] transition-colors duration-100 hover:bg-[var(--node-hover)] hover:text-[var(--node-fg)] touch:h-9',
           styles.focusRing,
         )}
       >
         <DeviceIcon className="size-3.5 flex-none" />
         <span className="truncate max-sm:hidden">{device ? device.name : 'Responsive'}</span>
-        <ChevronDown className="size-3 flex-none" />
+        <ChevronDown className="size-3.5 flex-none opacity-70" />
       </button>
       {device && (
         <ToolButton

@@ -2,8 +2,8 @@
 // device's outline with its name and size above it (the app draws the page
 // over the outline), and what went wrong when a page couldn't open.
 
-import { RotateCw, TriangleAlert } from 'lucide-react';
-import { NodeButton } from '@hyperpane/ui';
+import { RotateCw, TriangleAlert } from '@hyperpane/icons';
+import { Button, IconTile } from '@hyperpane/ui';
 import { display, hostOf } from '../lib/address.ts';
 import { LABEL, type Viewport } from '../app/useStage.ts';
 
@@ -19,7 +19,7 @@ export function DeviceFrame({
   return (
     <>
       <div
-        className="text-2xs pointer-events-none absolute right-0 left-0 truncate text-center text-[var(--node-muted)] tabular-nums"
+        className="pointer-events-none absolute right-0 left-0 truncate text-center text-xs text-[var(--node-muted)] tabular-nums"
         style={{ top: shown.top - LABEL + 2 }}
       >
         {view.name} · {view.width} × {view.height}
@@ -30,20 +30,19 @@ export function DeviceFrame({
   );
 }
 
+/** What went wrong: an amber tile, the words, Try again. */
 export function PageError({ error, onRetry }: { error: { url: string; message: string }; onRetry(): void }) {
   return (
-    <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-[var(--node-bg)] p-6 text-center">
-      <span className="rounded-surface grid size-10 place-items-center bg-[color-mix(in_srgb,var(--ansi-3)_12%,transparent)]">
-        <TriangleAlert className="size-5 text-[var(--ansi-3)]" />
-      </span>
-      <div className="flex flex-col gap-1">
-        <p className="text-sm font-medium">Couldn’t open {hostOf(error.url) || display(error.url)}</p>
-        <p className="max-w-sm text-[var(--node-muted)]">{error.message}</p>
+    <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 overflow-auto bg-[var(--node-bg)] p-6 text-center">
+      <IconTile icon={<TriangleAlert />} tint="var(--amber-soft-foreground)" />
+      <div className="flex max-w-sm flex-col gap-1">
+        <p className="text-[13px] font-medium">Couldn’t open {hostOf(error.url) || display(error.url)}</p>
+        <p className="text-xs leading-relaxed text-[var(--node-muted)] [overflow-wrap:anywhere]">{error.message}</p>
       </div>
-      <NodeButton className="mt-1" onClick={onRetry}>
-        <RotateCw />
+      <Button size="sm" variant="secondary" className="mt-1" onClick={onRetry}>
+        <RotateCw className="size-3.5" />
         Try again
-      </NodeButton>
+      </Button>
     </div>
   );
 }

@@ -12,7 +12,7 @@
 import type { Host } from '@hyperpane/sdk/client';
 import { useData, useServers, useSetting } from '@hyperpane/sdk/client';
 import { Empty, cn, useCompact, useMenu } from '@hyperpane/ui';
-import { Globe, Server } from 'lucide-react';
+import { Globe, Server } from '@hyperpane/icons';
 import { fileUrl, searchUrl } from '../lib/address.ts';
 import { viewport } from '../lib/devices.ts';
 import { Blank, BookmarksBar } from '../views/Bookmarks.tsx';
@@ -27,6 +27,7 @@ import { usePage } from './usePage.ts';
 import { useProgress } from './useProgress.ts';
 import { useStage } from './useStage.ts';
 import { useNewWindow, useWindowMenu } from './useWindow.ts';
+import { ACCENT } from '../lib/accent.ts';
 
 export function Browser({ host }: { host: Host }) {
   const data = useData();
@@ -75,7 +76,7 @@ export function Browser({ host }: { host: Host }) {
   if (!host.web.available) {
     return (
       <Empty
-        bordered={false}
+        size="compact"
         className="h-full"
         icon={<Globe />}
         title="No pages here"
@@ -89,9 +90,9 @@ export function Browser({ host }: { host: Host }) {
   }
 
   return (
-    <div className="flex h-full flex-col text-xs" onKeyDown={onKeyDown}>
+    <div className="flex h-full flex-col text-[13px] leading-5" onKeyDown={onKeyDown} style={ACCENT}>
       {/* The bars, one line under them all (the loading line over it). */}
-      <div className="relative flex flex-none flex-col border-b border-[var(--node-border)]">
+      <div className="relative flex flex-none flex-col border-b border-[var(--hairline)]">
         <Toolbar
           url={url}
           address={page.address}
@@ -128,7 +129,7 @@ export function Browser({ host }: { host: Host }) {
 
         {elsewhere && (
           <Empty
-            bordered={false}
+            size="compact"
             className="h-full"
             icon={<Server />}
             title="On another server"
