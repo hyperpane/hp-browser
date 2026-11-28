@@ -49,11 +49,11 @@ export function useWindowMenu(host: Host, page: Page) {
   useEffect(() => host.on('menu', (v: { id: string }) => onMenuItem.current(v.id)), [host]);
   useEffect(() => {
     host.win.setMenu([
-      { id: 'back', label: 'Back', shortcut: keys('⌘['), disabled: !nav.back },
-      { id: 'forward', label: 'Forward', shortcut: keys('⌘]'), disabled: !nav.forward },
-      { id: 'reload', label: 'Reload Page', disabled: !url },
-      { id: 'devtools', label: 'Developer Tools', disabled: !url },
-      { id: 'outside', label: 'Open in Default Browser', disabled: !/^https?:/i.test(url) },
+      { id: 'back', label: 'Back', icon: 'ChevronLeft', shortcut: keys('⌘['), disabled: !nav.back },
+      { id: 'forward', label: 'Forward', icon: 'ChevronRight', shortcut: keys('⌘]'), disabled: !nav.forward },
+      { id: 'reload', label: 'Reload Page', icon: 'RotateCw', disabled: !url },
+      { id: 'devtools', label: 'Developer Tools', icon: 'Bug', disabled: !url },
+      { id: 'outside', label: 'Open in Default Browser', icon: 'ExternalLink', disabled: !/^https?:/i.test(url) },
     ]);
   }, [host, nav.back, nav.forward, url]);
 }

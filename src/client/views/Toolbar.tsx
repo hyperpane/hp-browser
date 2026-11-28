@@ -27,7 +27,7 @@ import {
   X,
 } from '@hyperpane/icons';
 import { keys } from '@hyperpane/sdk/client';
-import { Progress as KitProgress, ToolButton, Toolbar as KitToolbar, cn, styles } from '@hyperpane/ui';
+import { Progress as KitProgress, ToolButton, Toolbar as KitToolbar, cn, styles, isComposing } from '@hyperpane/ui';
 import { display, security } from '../lib/address.ts';
 import type { DeviceKind } from '../lib/devices.ts';
 
@@ -135,7 +135,7 @@ export function Toolbar({
           onFocus={(e) => e.currentTarget.select()}
           onBlur={onRevert}
           onKeyDown={(e) => {
-            if (e.key === 'Enter') {
+            if (e.key === 'Enter' && !isComposing(e)) {
               e.preventDefault();
               onSubmit();
             } else if (e.key === 'Escape') {
@@ -170,7 +170,7 @@ export function Toolbar({
         title={device ? `${device.name}: ${device.width} × ${device.height}` : 'Responsive: the page fills the window'}
         onClick={(e) => onDeviceMenu(below(e))}
         className={cn(
-          'rounded-control flex h-7 max-w-40 flex-none items-center gap-1.5 px-2 text-[13px] text-[var(--node-muted)] transition-colors duration-100 hover:bg-[var(--node-hover)] hover:text-[var(--node-fg)] touch:h-9',
+          'rounded-full flex h-7 max-w-40 flex-none items-center gap-1.5 px-2 text-[13px] text-[var(--node-muted)] transition-colors duration-100 hover:bg-[var(--node-hover)] hover:text-[var(--node-fg)] touch:h-9',
           styles.focusRing,
         )}
       >

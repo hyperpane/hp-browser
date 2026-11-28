@@ -67,11 +67,11 @@ export function Blank({ list, actions }: { list: Bookmark[]; actions: BookmarkAc
               title={b.url}
               {...handlers(b, actions)}
               className={cn(
-                'rounded-card flex min-w-0 items-center gap-2.5 bg-[var(--surface-raised)] p-2.5 text-left shadow-[var(--highlight-top),var(--shadow-raised)] ring-1 ring-[var(--hairline)] transition-[background-color,box-shadow] duration-100 ring-inset hover:bg-[var(--node-hover)]',
+                'rounded-card flex min-w-0 items-center gap-2.5 bg-[var(--surface-raised)] p-2.5 text-left transition-colors duration-100 hover:bg-[var(--node-hover)]',
                 styles.focusRing,
               )}
             >
-              <span className="grid size-7 flex-none place-items-center rounded-[7px] bg-[var(--fill)] text-[var(--node-muted)]">
+              <span className="grid size-7 flex-none place-items-center rounded-control bg-[var(--fill)] text-[var(--node-muted)]">
                 <Globe className="size-4" variant="outline" />
               </span>
               <span className="flex min-w-0 flex-col">

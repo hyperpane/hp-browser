@@ -10,7 +10,7 @@
 // it does for other plugins that drive it (`useApi`).
 
 import type { Host } from '@hyperpane/sdk/client';
-import { useData, useServers, useSetting } from '@hyperpane/sdk/client';
+import { useBack, useData, useServers, useSetting } from '@hyperpane/sdk/client';
 import { Empty, cn, useCompact, useMenu } from '@hyperpane/ui';
 import { Globe, Server } from '@hyperpane/icons';
 import { fileUrl, searchUrl } from '../lib/address.ts';
@@ -53,6 +53,10 @@ export function Browser({ host }: { host: Host }) {
   const { url, error } = page;
   const progress = useProgress(page.loading);
   useWindowMenu(host, page);
+  // The header's back button and the toolbar's: the page's history, on
+  // while it can go back.
+  const back = () => host.web.back();
+  useBack(page.nav.back ? back : null);
   useApi(host, page);
   const { stage, box, rect, shown } = useStage(host, view, host.web.available && !!url && !error);
   const device = useDevice(host, data, view, box);
@@ -106,7 +110,7 @@ export function Browser({ host }: { host: Host }) {
           onAddress={page.type}
           onSubmit={page.submit}
           onRevert={page.revert}
-          onBack={() => host.web.back()}
+          onBack={back}
           onForward={() => host.web.forward()}
           onReload={() => page.reload()}
           onStop={() => host.web.stop()}
